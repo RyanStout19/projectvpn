@@ -4,7 +4,7 @@ provider "azurerm" {
 
 variable "vm_name" {
   type    = string
-  default = "asa-vm00"
+  default = "asa-vm01"
 }
 
 variable "admin_username" {
@@ -14,7 +14,7 @@ variable "admin_username" {
 
 variable "admin_password" {
   type    = string
-  default = "ChangeMe123!"  # Make sure to change this to a secure password
+  default = "FVYKqGwYbIO79qA0"  # Make sure to change this to a secure password
 }
 
 variable "availability_zone" {
@@ -24,7 +24,7 @@ variable "availability_zone" {
 
 variable "vm_storage_account" {
   type    = string
-  default = "projectvpnsto00"
+  default = "projectvpnsto01"
 }
 
 variable "virtual_network_resource_group" {
