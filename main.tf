@@ -14,7 +14,8 @@ variable "admin_username" {
 
 variable "admin_password" {
   type    = string
-  default = "FVYKqGwYbIO79qA0"  # Make sure to change this to a secure password
+  sensitive = true
+  default = ""  # Make sure to change this to a secure password
 }
 
 variable "availability_zone" {
