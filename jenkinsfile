@@ -8,10 +8,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        string(credentialsId: 'TF_VAR_admin_username', variable: 'TF_VAR_admin_username'),
-                        string(credentialsId: 'TF_VAR_admin_password', variable: 'TF_VAR_admin_password'),
-                        string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
-                        string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
+                        string(credentialsId: 'TF_VAR_admin_username', variable: 'admin_username'),
+                        string(credentialsId: 'TF_VAR_admin_password', variable: 'admin_password'),
                         string(credentialsId: 'ARM_SUBSCRIPTION_ID', variable: 'ARM_SUBSCRIPTION_ID')
                     ]) {
                         sh 'echo "Initializing Terraform"'
@@ -24,10 +22,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        string(credentialsId: 'TF_VAR_admin_username', variable: 'TF_VAR_admin_username'),
-                        string(credentialsId: 'TF_VAR_admin_password', variable: 'TF_VAR_admin_password'),
-                        string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
-                        string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
+                        string(credentialsId: 'TF_VAR_admin_username', variable: 'admin_username'),
+                        string(credentialsId: 'TF_VAR_admin_password', variable: 'admin_password'),
                         string(credentialsId: 'ARM_SUBSCRIPTION_ID', variable: 'ARM_SUBSCRIPTION_ID')
                     ]) {
                         sh 'echo "Generating Terraform plan"'
@@ -45,10 +41,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        string(credentialsId: 'TF_VAR_admin_username', variable: 'TF_VAR_admin_username'),
-                        string(credentialsId: 'TF_VAR_admin_password', variable: 'TF_VAR_admin_password'),
-                        string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
-                        string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
+                        string(credentialsId: 'TF_VAR_admin_username', variable: 'admin_username'),
+                        string(credentialsId: 'TF_VAR_admin_password', variable: 'admin_password'),
                         string(credentialsId: 'ARM_SUBSCRIPTION_ID', variable: 'ARM_SUBSCRIPTION_ID')
                     ]) {
                         sh 'echo "Applying Terraform plan"'
