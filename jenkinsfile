@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        PATH = "home/stoutmondo/projectvpn/main.tf"
-    }
     stages {
         stage('Initialize') {
             steps {
