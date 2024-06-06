@@ -1,11 +1,17 @@
 pipeline {
     agent any
+    environment {
+        PATH = "${env.PATH}:/usr/local/bin"
+    }
     stages {
         stage('Initialize') {
             steps {
                 script {
                     withCredentials([
                         string(credentialsId: 'admin_password', variable: 'admin_password'),
+                        string(credentialsId: 'client_id', variable: 'client_id'),
+                        string(credentialsId: 'tenant_id', variable: 'tenant_id'),
+                        string(credentialsId: 'client_secret', variable: 'client_secret'),
                     ]) {
                         sh 'echo "Initializing Terraform"'
                         sh 'terraform init'
@@ -18,6 +24,9 @@ pipeline {
                 script {
                     withCredentials([
                         string(credentialsId: 'admin_password', variable: 'admin_password'),
+                        string(credentialsId: 'client_id', variable: 'client_id'),
+                        string(credentialsId: 'tenant_id', variable: 'tenant_id'),
+                        string(credentialsId: 'client_secret', variable: 'client_secret'),
                     ]) {
                         sh 'echo "Generating Terraform plan"'
                         sh 'terraform plan -out=tfplan'
@@ -35,6 +44,9 @@ pipeline {
                 script {
                     withCredentials([
                         string(credentialsId: 'admin_password', variable: 'admin_password'),
+                        string(credentialsId: 'client_id', variable: 'client_id'),
+                        string(credentialsId: 'tenant_id', variable: 'tenant_id'),
+                        string(credentialsId: 'client_secret', variable: 'client_secret'),
                     ]) {
                         sh 'echo "Applying Terraform plan"'
                         sh 'terraform apply -auto-approve tfplan'
