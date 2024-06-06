@@ -9,9 +9,9 @@ pipeline {
                 script {
                     withCredentials([
                         string(credentialsId: 'admin_password', variable: 'admin_password'),
-                        string(credentialsId: 'client_id', variable: 'client_id'),
-                        string(credentialsId: 'tenant_id', variable: 'tenant_id'),
-                        string(credentialsId: 'client_secret', variable: 'client_secret'),
+                        string(credentialsId: 'CLIENT_ID', variable: 'CLIENT_ID'),
+                        string(credentialsId: 'TENANT_ID', variable: 'TENANT_ID'),
+                        string(credentialsId: 'CLIENT_SECRET', variable: 'CLIENT_SECRET'),
                     ]) {
                         sh 'echo "Initializing Terraform"'
                         sh 'terraform init'
@@ -24,9 +24,9 @@ pipeline {
                 script {
                     withCredentials([
                         string(credentialsId: 'admin_password', variable: 'admin_password'),
-                        string(credentialsId: 'client_id', variable: 'client_id'),
-                        string(credentialsId: 'tenant_id', variable: 'tenant_id'),
-                        string(credentialsId: 'client_secret', variable: 'client_secret'),
+                        string(credentialsId: 'CLIENT_ID', variable: 'CLIENT_ID'),
+                        string(credentialsId: 'TENANT_ID', variable: 'TENANT_ID'),
+                        string(credentialsId: 'CLIENT_SECRET', variable: 'CLIENT_SECRET'),
                     ]) {
                         sh 'echo "Generating Terraform plan"'
                         sh 'terraform plan -out=tfplan'
@@ -44,9 +44,9 @@ pipeline {
                 script {
                     withCredentials([
                         string(credentialsId: 'admin_password', variable: 'admin_password'),
-                        string(credentialsId: 'client_id', variable: 'client_id'),
-                        string(credentialsId: 'tenant_id', variable: 'tenant_id'),
-                        string(credentialsId: 'client_secret', variable: 'client_secret'),
+                        string(credentialsId: 'CLIENT_ID', variable: 'CLIENT_ID'),
+                        string(credentialsId: 'TENANT_ID', variable: 'TENANT_ID'),
+                        string(credentialsId: 'CLIENT_SECRET', variable: 'CLIENT_SECRET'),
                     ]) {
                         sh 'echo "Applying Terraform plan"'
                         sh 'terraform apply -auto-approve tfplan'
