@@ -294,6 +294,7 @@ resource "azurerm_resource_group_template_deployment" "example" {
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2019-07-01",
+      "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
       "properties": {
         "hardwareProfile": {
