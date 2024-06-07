@@ -287,6 +287,18 @@ resource "azurerm_resource_group_template_deployment" "example" {
       "metadata": {
         "description": "The size of the Virtual Machine."
       }
+    },
+    "baseStorageURI": {
+      "type": "string",
+      "metadata": {
+        "description": "Base URI for the storage account."
+      }
+    },
+    "location": {
+      "type": "string",
+      "metadata": {
+        "description": "The location for the resources."
+      }
     }
   },
   "variables": {},
