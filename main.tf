@@ -174,165 +174,436 @@ resource "azurerm_resource_group_template_deployment" "example" {
 
   template_content = <<TEMPLATE
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "vmName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the ASA Virtual Machine."
-      }
-    },
-    "adminUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Username for the Virtual Machine. admin, Administrator among other values are disallowed - see Azure docs"
-      }
-    },
-    "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Password for the Virtual Machine. Passwords must be 12 to 72 chars and have at least 3 of the following: Lowercase, uppercase, numbers, special chars"
-      }
-    },
-    "availabilityZone": {
-      "type": "int",
-      "metadata": {
-        "description": "Specify the availability zone for deployment. Ensure that selected region supports availability zones and value provided is correct. Set to 0 if you do not want to use Availability Zones"
-      }
-    },
-    "vmStorageAccount": {
-      "type": "string",
-      "metadata": {
-        "description": "A storage account name (boot diags require a storage account). Between 3 and 24 characters. Lowercase letters and numbers only"
-      }
-    },
-    "virtualNetworkResourceGroup": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the virtual network's Resource Group"
-      }
-    },
-    "virtualNetworkName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the virtual network"
-      }
-    },
-    "mgmtSubnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "The management interface will attach to this subnet"
-      }
-    },
-    "mgmtSubnetIP": {
-      "type": "string",
-      "metadata": {
-        "description": "ASAv IP on the mgmt interface (example: 10.0.0.10)"
-      }
-    },
-    "data1SubnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "The ASAv data1 interface will attach to this subnet"
-      }
-    },
-    "data1SubnetIP": {
-      "type": "string",
-      "metadata": {
-        "description": "ASAv IP on the data1 interface (example: 10.0.1.10)"
-      }
-    },
-    "data2SubnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "The ASAv data2 interface will attach to this subnet"
-      }
-    },
-    "data2SubnetIP": {
-      "type": "string",
-      "metadata": {
-        "description": "ASAv IP on the data2 interface (example: 10.0.2.10)"
-      }
-    },
-    "data3SubnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "The ASAv data3 interface will attach to this subnet"
-      }
-    },
-    "data3SubnetIP": {
-      "type": "string",
-      "metadata": {
-        "description": "ASAv IP on the data3 interface (example: 10.0.3.10)"
-      }
-    },
-    "vmSize": {
-      "type": "string",
-      "allowedValues": [
-        "Standard_D3",
-        "Standard_D4",
-        "Standard_D5",
-        "Standard_D3_v2",
-        "Standard_D4_v2",
-        "Standard_D5_v2",
-        "Standard_D8_v3",
-        "Standard_D16_v3",
-        "Standard_D8s_v3",
-        "Standard_D16s_v3",
-        "Standard_DS3",
-        "Standard_DS4",
-        "Standard_DS5"
-      ],
-      "metadata": {
-        "description": "The size of the Virtual Machine."
-      }
-    },
-    "baseStorageURI": {
-      "type": "string",
-      "metadata": {
-        "description": "Base URI for the storage account."
-      }
-    },
-    "location": {
-      "type": "string",
-      "metadata": {
-        "description": "The location for the resources."
-      }
-    }
-  },
-  "variables": {},
-  "resources": [
-    {
-      "type": "Microsoft.Compute/virtualMachines",
-      "apiVersion": "2019-07-01",
-      "name": "[parameters('vmName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[parameters('vmSize')]"
-        },
-        "osProfile": {
-          "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', 'nic1')]"
-            }
-          ]
+   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+   "contentVersion": "1.0.0.0",
+   "parameters": {
+      "vmName": {
+         "type": "string",
+         "defaultValue": "asa-vm00",
+         "metadata": {
+            "description": "Name of the ASA Virtual Machine."
+         }
+      },
+      "adminUsername": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "Username for the Virtual Machine. admin, Administrator among other values are disallowed - see Azure docs"
+         }
+      },
+      "adminPassword": {
+         "type": "securestring",
+         "defaultValue": "",
+         "metadata": {
+            "description": "Password for the Virtual Machine. Passwords must be 12 to 72 chars and have at least 3 of the following: Lowercase, uppercase, numbers, special chars"
+         }
+      },
+      "availabilityZone": {
+          "type": "int",
+          "defaultValue": 0,
+          "minValue": 0,
+          "maxValue": 3,
+          "metadata": {
+              "description": "Specify the availability zone for deployment. Ensure that selected region supports availability zones and value provided is correct. Set to 0 if you do not want to use Availability Zones"
+          }
+      },
+      "vmStorageAccount": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "A storage account name (boot diags require a storage account). Between 3 and 24 characters. Lowercase letters and numbers only"
+         }
+      },
+      "virtualNetworkResourceGroup": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "Name of the virtual network's Resource Group"
+         }
+      },
+      "virtualNetworkName": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "Name of the virtual network"
+         }
+      },
+      "mgmtSubnetName": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "The management interface will attach to this subnet"
+         }
+      },
+      "mgmtSubnetIP": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "ASAv IP on the mgmt interface (example: 192.168.0.10)"
+         }
+      },
+      "data1SubnetName": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "The ASAv data1 interface will attach to this subnet"
+         }
+      },
+      "data1SubnetIP": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "ASAv IP on the data1 interface (example: 192.168.1.10)"
+         }
+      },
+      "data2SubnetName": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "The ASAv data2 interface will attach to this subnet"
+         }
+      },
+      "data2SubnetIP": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "ASAv IP on the data2 interface (example: 192.168.2.10)"
+         }
+      },
+      "data3SubnetName": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "The ASAv data3 interface will attach to this subnet"
+         }
+      },
+      "data3SubnetIP": {
+         "type": "string",
+         "defaultValue": "",
+         "metadata": {
+            "description": "ASAv IP on the data3 interface (example: 192.168.3.10)"
+         }
+      },
+      "vmSize": {
+         "type": "string",
+         "defaultValue": "Standard_D3_v2",
+         "allowedValues": [
+            "Standard_D3",
+            "Standard_D4",
+            "Standard_D5",
+            "Standard_D3_v2",
+            "Standard_D4_v2",
+            "Standard_D5_v2",
+            "Standard_D8_v3",
+            "Standard_D16_v3",
+            "Standard_D8s_v3",
+            "Standard_D16s_v3",
+            "Standard_DS3",
+            "Standard_DS4",
+            "Standard_DS5",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_F4",
+            "Standard_F8",
+            "Standard_F16",
+            "Standard_F4s",
+            "Standard_F8s",
+            "Standard_F16s",
+            "Standard_F8s_v2",
+            "Standard_F16s_v2"
+         ],
+         "metadata": {
+            "description": "Size of the ASAv Virtual Machine"
+         }
+      },
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
         }
+      },
+      "baseStorageURI": {
+         "type": "string",
+         "defaultValue": ".blob.core.windows.net",
+         "metadata": {
+            "description": "Base suffix for Azure storage URIs."
+         }
       }
-    }
-  ],
-  "outputs": {
-    "exampleOutput": {
-      "type": "string",
-      "value": "someoutput"
-    }
-  }
+   },
+   "variables": {
+      "subnet1Ref": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'), parameters('mgmtSubnetName'))]",
+      "subnet2Ref": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'), parameters('data1SubnetName'))]",
+      "subnet3Ref": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'), parameters('data2SubnetName'))]",
+      "subnet4Ref": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'), parameters('data3SubnetName'))]",
+      "vmNic0Name": "[concat(parameters('vmName'),'-nic0')]",
+      "vmNic1Name": "[concat(parameters('vmName'),'-nic1')]",
+      "vmNic2Name": "[concat(parameters('vmName'),'-nic2')]",
+      "vmNic3Name": "[concat(parameters('vmName'),'-nic3')]",
+      "mgtNsgName": "[concat(parameters('vmName'),'-SSH-SecurityGroup')]",
+      "vmMgmtPublicIPAddressName": "[concat(parameters('vmName'),'nic0-ip')]",
+      "vmMgmtPublicIPAddressType": "Static",
+      "vmMgmtPublicIPAddressDnsName": "[variables('vmMgmtPublicIPAddressName')]",
+      "selectedAvailZone":"[if(equals(parameters('availabilityZone'), 0), json('null'), array(parameters('availabilityZone')))]",
+      "pipSku": "Standard"
+   },
+   "resources": [
+      {
+         "apiVersion": "2023-06-01",
+         "type": "Microsoft.Network/publicIPAddresses",
+         "name": "[variables('vmMgmtPublicIPAddressName')]",
+         "location": "[parameters('location')]",
+         "sku": {
+             "name": "[variables('pipSku')]"
+         },
+         "properties": {
+            "publicIPAllocationMethod": "[variables('vmMgmtPublicIpAddressType')]",
+            "dnsSettings": {
+               "domainNameLabel": "[variables('vmMgmtPublicIPAddressDnsName')]"
+            }
+         },
+         "zones": "[variables('selectedAvailZone')]"
+      },
+      {
+         "apiVersion": "2023-06-01",
+         "type": "Microsoft.Network/networkSecurityGroups",
+         "name": "[variables('mgtNsgName')]",
+         "location": "[parameters('location')]",
+         "properties": {
+            "securityRules": [
+               {
+                  "name": "SSH-Rule",
+                  "properties": {
+                        "description": "Allow SSH",
+                        "protocol": "Tcp",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "22",
+                        "sourceAddressPrefix": "*",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 100,
+                        "direction": "Inbound"
+                  }
+               },
+               {
+                  "name": "UDP-Rule1",
+                  "properties": {
+                        "description": "Allow UDP",
+                        "protocol": "Udp",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "500",
+                        "sourceAddressPrefix": "*",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 101,
+                        "direction": "Inbound"
+                  }
+               },
+               {
+                  "name": "UDP-Rule2",
+                  "properties": {
+                        "description": "Allow UDP",
+                        "protocol": "Udp",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "4500",
+                        "sourceAddressPrefix": "*",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 102,
+                        "direction": "Inbound"
+                  }
+               }
+            ]
+         }
+      },
+      {
+         "apiVersion": "2023-06-01",
+         "type": "Microsoft.Network/networkInterfaces",
+         "name": "[variables('vmNic0Name')]",
+         "location": "[parameters('location')]",
+         "dependsOn": [
+            "[resourceId('Microsoft.Network/networkSecurityGroups',variables('mgtNsgName'))]",
+            "[resourceId('Microsoft.Network/publicIPAddresses', variables('vmMgmtPublicIPAddressName'))]"
+         ],
+         "properties": {
+            "ipConfigurations": [
+               {
+                  "name": "ipconfig1",
+                  "properties": {
+                     "privateIPAllocationMethod": "Static",
+                     "privateIPAddress": "[parameters('mgmtSubnetIP')]",
+                     "subnet": {
+                        "id": "[variables('subnet1Ref')]"
+                     },
+                     "publicIPAddress": {
+                        "id": "[resourceId('Microsoft.Network/publicIPAddresses/', variables('vmMgmtPublicIPAddressName'))]"
+                     }
+                  }
+               }
+            ],
+            "networkSecurityGroup": {
+               "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('mgtNsgName'))]"
+            },
+            "enableAcceleratedNetworking": false,
+            "enableIPForwarding": true
+         }
+      },
+      {
+         "apiVersion": "2023-06-01",
+         "type": "Microsoft.Network/networkInterfaces",
+         "name": "[variables('vmNic1Name')]",
+         "location": "[parameters('location')]",
+         "properties": {
+            "ipConfigurations": [
+               {
+                  "name": "ipconfig1",
+                  "properties": {
+                     "privateIPAllocationMethod": "Static",
+                     "privateIPAddress": "[parameters('data1SubnetIP')]",
+                     "subnet": {
+                        "id": "[variables('subnet2Ref')]"
+                     }
+                  }
+               }
+            ],
+            "enableAcceleratedNetworking": true,
+            "enableIPForwarding": true
+         }
+      },
+      {
+         "apiVersion": "2023-06-01",
+         "type": "Microsoft.Network/networkInterfaces",
+         "name": "[variables('vmNic2Name')]",
+         "location": "[parameters('location')]",
+         "properties": {
+            "ipConfigurations": [
+               {
+                  "name": "ipconfig1",
+                  "properties": {
+                     "privateIPAllocationMethod": "Static",
+                     "privateIPAddress": "[parameters('data2SubnetIP')]",
+                     "subnet": {
+                        "id": "[variables('subnet3Ref')]"
+                     }
+                  }
+               }
+            ],
+            "enableAcceleratedNetworking": true,
+            "enableIPForwarding": true
+         }
+      },
+      {
+         "apiVersion": "2023-06-01",
+         "type": "Microsoft.Network/networkInterfaces",
+         "name": "[variables('vmNic3Name')]",
+         "location": "[parameters('location')]",
+         "properties": {
+            "ipConfigurations": [
+               {
+                  "name": "ipconfig1",
+                  "properties": {
+                     "privateIPAllocationMethod": "Static",
+                     "privateIPAddress": "[parameters('data3SubnetIP')]",
+                     "subnet": {
+                        "id": "[variables('subnet4Ref')]"
+                     }
+                  }
+               }
+            ],
+            "enableAcceleratedNetworking": true,
+            "enableIPForwarding": true
+         }
+      },
+      {
+         "type": "Microsoft.Storage/storageAccounts",
+         "name": "[concat(parameters('vmStorageAccount'))]",
+         "apiVersion": "2023-04-01",
+         "sku": {
+            "name": "Standard_LRS"
+         },
+         "location": "[parameters('location')]",
+         "kind": "Storage",
+         "properties": {}
+      },
+      {
+         "apiVersion": "2022-03-01",
+         "type": "Microsoft.Compute/virtualMachines",
+         "name": "[parameters('vmName')]",
+         "location": "[parameters('location')]",
+     "plan": {
+                "name": "asav-azure-byol",
+                "product": "cisco-asav",
+                "publisher": "cisco"
+         },
+         "dependsOn": [
+            "[resourceId('Microsoft.Storage/storageAccounts', parameters('vmStorageAccount'))]",
+            "[resourceId('Microsoft.Network/networkInterfaces',variables('vmNic0Name'))]",
+            "[resourceId('Microsoft.Network/networkInterfaces',variables('vmNic1Name'))]",
+            "[resourceId('Microsoft.Network/networkInterfaces',variables('vmNic2Name'))]",
+            "[resourceId('Microsoft.Network/networkInterfaces',variables('vmNic3Name'))]"
+         ],
+         "properties": {
+            "hardwareProfile": {
+               "vmSize": "[parameters('vmSize')]"
+            },
+            "osProfile": {
+               "computername": "[parameters('vmName')]",
+               "adminUsername": "[parameters('AdminUsername')]",
+               "adminPassword": "[parameters('AdminPassword')]"
+            },
+            "storageProfile": {
+               "imageReference": {
+            "publisher": "cisco",
+            "sku": "asav-azure-byol",
+            "version": "latest",
+            "offer": "cisco-asav"       
+               },
+               "osDisk": {
+                  "osType": "Linux",
+                  "caching": "ReadWrite",
+                  "createOption": "FromImage"
+               }
+            },
+            "networkProfile": {
+               "networkInterfaces": [
+                  {
+                     "properties": {
+                        "primary": true
+                     },
+                     "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('vmNic0Name'))]"
+                  },
+                  {
+                     "properties": {
+                        "primary": false
+                     },
+                     "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('vmNic1Name'))]"
+                  },
+                  {
+                     "properties": {
+                        "primary": false
+                     },
+                     "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('vmNic2Name'))]"
+                  },
+                  {
+                     "properties": {
+                        "primary": false
+                     },
+                     "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('vmNic3Name'))]"
+                  }
+               ]
+            },
+            "diagnosticsProfile": {
+               "bootDiagnostics": {
+                  "enabled": true,
+                  "storageUri": "[uri(concat('http://',parameters('vmStorageAccount'),parameters('baseStorageURI')), '')]"
+               }
+            }
+         },
+         "zones": "[variables('selectedAvailZone')]"
+      }
+   ],
+   "outputs": {}
 }
 TEMPLATE
 }
