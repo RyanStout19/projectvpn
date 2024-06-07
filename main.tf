@@ -161,12 +161,12 @@ locals {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "example-group"
+  name     = "projectvpn-rg"
   location = var.location
 }
 
 resource "azurerm_resource_group_template_deployment" "example" {
-  name                = "example-deploy"
+  name                = "projectvpn-rg"
   resource_group_name = azurerm_resource_group.example.name
   deployment_mode     = "Incremental"
 
