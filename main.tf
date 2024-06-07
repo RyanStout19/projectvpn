@@ -164,14 +164,6 @@ resource "azurerm_resource_group" "example" {
   name     = "projectvpn01-rg"
   location = var.location
 }
-
-resource "azurerm_resource_group_template_deployment" "example" {
-  name                = "projectvpn01-rg"
-  resource_group_name = azurerm_resource_group.example.name
-  deployment_mode     = "Incremental"
-
-  parameters_content = jsonencode(local.parameters)
-
   template_content = <<TEMPLATE
 {
    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
