@@ -160,14 +160,14 @@ locals {
   }
 }
 
-resource "azurerm_resource_group" "example" {
+resource "azurerm_resource_group" "projectvpn" {
   name     = "projectvpn-rg"
   location = var.location
 }
 
-resource "azurerm_resource_group_template_deployment" "example" {
+resource "azurerm_resource_group_template_deployment" "projectvpn" {
   name                = "projectvpn-rg"
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = azurerm_resource_group.projectvpn.name
   deployment_mode     = "Incremental"
 
   parameters_content = jsonencode(local.parameters)
