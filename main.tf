@@ -609,5 +609,5 @@ TEMPLATE
 }
 
 output "arm_example_output" {
-  value = jsondecode(azurerm_resource_group_template_deployment.example.output_content).exampleOutput.value
+  value = jsondecode(azurerm_resource_group_template_deployment.projectvpn.output_content).exampleOutput.value
 }
