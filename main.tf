@@ -160,10 +160,14 @@ locals {
   }
 }
 
-#resource "azurerm_resource_group" "projectvpn" {
-#  name     = "projectvpn-rg"
-#  location = var.location
-#}
+resource "azurerm_resource_group" "projectvpn" {
+  name     = "projectvpn-rg"
+  location = var.location
+
+  lifecycle {
+    ignore_changes = all
+  }
+}
 
 resource "azurerm_resource_group_template_deployment" "projectvpn" {
   name                = "projectvpn-rg"
