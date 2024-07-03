@@ -16,7 +16,7 @@ variable "admin_password" {
 
 variable "availability_zone" {
   type    = number
-  default = 0
+  default = 1
 }
 
 variable "vm_storage_account" {
