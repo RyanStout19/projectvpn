@@ -262,7 +262,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
                "imageReference": {
                   "publisher": "cisco",
                   "offer": "cisco-asav",
-                  "sku": "asav-std",
+                  "sku": "asav-azure-byol",
                   "version": "latest"
                }
             },
