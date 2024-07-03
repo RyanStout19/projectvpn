@@ -32,7 +32,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
       },
       "availabilityZone": {
           "type": "int",
-          "defaultValue": 0,
+          "defaultValue": 1,
           "minValue": 0,
           "maxValue": 3,
           "metadata": {
