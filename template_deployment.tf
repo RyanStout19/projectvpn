@@ -295,7 +295,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
             }
          },
          "zones": [
-            "[if(equals(parameters('availabilityZone'),0),json('null'),parameters('availabilityZone'))]"
+            "[if(equals(parameters('availabilityZone'),1),json('null'),parameters('availabilityZone'))]"
          ]
       }
    ],
