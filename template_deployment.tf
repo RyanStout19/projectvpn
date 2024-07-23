@@ -2,6 +2,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
   name                = "projectvpn-rg"
   resource_group_name = azurerm_resource_group.projectvpn.name
   deployment_mode     = "Complete"
+  depends_on = [var.virtual_network_resource_group]
 
   parameters_content = jsonencode(local.parameters)
   template_content = <<TEMPLATE
