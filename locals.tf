@@ -56,5 +56,6 @@ locals {
     },
     "vnetName" = {
       value = var.stouts_vnet
+    }
   }
 }
