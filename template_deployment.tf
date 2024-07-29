@@ -7,7 +7,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
       value = local.vnet_name
     }
   })
-    }
+}
 
   parameters_content = jsonencode(local.parameters)
   template_content = <<TEMPLATE
