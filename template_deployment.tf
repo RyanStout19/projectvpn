@@ -9,8 +9,8 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
   })
 }
 
-  parameters_content = jsonencode(local.parameters)
-  template_content = <<TEMPLATE
+parameters_content = jsonencode(local.parameters)
+template_content = <<TEMPLATE
 {
    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
    "contentVersion": "1.0.0.0",
