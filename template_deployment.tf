@@ -2,6 +2,11 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
   name                = "projectvpn-rg"
   resource_group_name = "projectvpn-2"
   deployment_mode     = "Complete"
+    parameters_content = jsonencode({
+    "vnetName" = {
+      value = local.vnet_name
+    }
+  })
 
   parameters_content = jsonencode(local.parameters)
   template_content = <<TEMPLATE
