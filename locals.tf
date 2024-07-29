@@ -53,6 +53,8 @@ locals {
     },
     "baseStorageURI" = {
       value = var.base_storage_uri
-    }
+    },
+    "vnetName" = {
+      value = var.stouts-vnet
   }
 }
