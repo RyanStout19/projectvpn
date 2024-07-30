@@ -146,7 +146,7 @@ template_content = <<TEMPLATE
       },
       "location": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "North Europe",
          "metadata": {
             "description": "Location (default: resource group location)"
          }
