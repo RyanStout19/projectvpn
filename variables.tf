@@ -26,7 +26,7 @@ variable "vm_storage_account" {
 
 variable "virtual_network_resource_group" {
   type    = string
-  default = "projectvpn-rg"
+  default = "projectvpn-2"
 }
 
 variable "virtual_network_name" {
