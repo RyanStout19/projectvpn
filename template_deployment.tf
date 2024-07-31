@@ -40,77 +40,77 @@ template_content = <<TEMPLATE
       },
       "vmStorageAccount": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "${var.vm_storage_account}",
          "metadata": {
             "description": "A storage account name (boot diags require a storage account). Between 3 and 24 characters. Lowercase letters and numbers only"
          }
       },
       "virtualNetworkResourceGroup": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "${var.virtual_network_resource_group}",
          "metadata": {
             "description": "Name of the virtual network's Resource Group"
          }
       },
       "virtualNetworkName": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "${var.virtual_network_name}",
          "metadata": {
             "description": "Name of the virtual network"
          }
       },
       "mgmtSubnetName": {
          "type": "string",
-         "defaultValue": "management",
+         "defaultValue": "${var.mgmt_subnet_name}",
          "metadata": {
             "description": "The management interface will attach to this subnet"
          }
       },
       "mgmtSubnetIP": {
          "type": "string",
-         "defaultValue": "10.0.0.10",
+         "defaultValue": "${var.mgmt_subnet_ip}",
          "metadata": {
             "description": "ASAv IP on the mgmt interface (example: 192.168.0.10)"
          }
       },
       "data1SubnetName": {
          "type": "string",
-         "defaultValue": "data-subnet1",
+         "defaultValue": "${var.data1_subnet_name}",
          "metadata": {
             "description": "The ASAv data1 interface will attach to this subnet"
          }
       },
       "data1SubnetIP": {
          "type": "string",
-         "defaultValue": "10.0.1.10",
+         "defaultValue": "${var.data1_subnet_ip}",
          "metadata": {
             "description": "ASAv IP on the data1 interface (example: 192.168.1.10)"
          }
       },
       "data2SubnetName": {
          "type": "string",
-         "defaultValue": "data-subnet2",
+         "defaultValue": "${var.data2_subnet_name}",
          "metadata": {
             "description": "The ASAv data2 interface will attach to this subnet"
          }
       },
       "data2SubnetIP": {
          "type": "string",
-         "defaultValue": "10.0.2.10",
+         "defaultValue": "${var.data2_subnet_ip}",
          "metadata": {
             "description": "ASAv IP on the data2 interface (example: 192.168.2.10)"
          }
       },
       "data3SubnetName": {
          "type": "string",
-         "defaultValue": "data-subnet3",
+         "defaultValue": "${var.data3_subnet_name}",
          "metadata": {
             "description": "The ASAv data3 interface will attach to this subnet"
          }
       },
       "data3SubnetIP": {
          "type": "string",
-         "defaultValue": "10.0.3.10",
+         "defaultValue": "${var.data3_subnet_ip}",
          "metadata": {
             "description": "ASAv IP on the data3 interface (example: 192.168.3.10)"
          }
