@@ -61,56 +61,56 @@ template_content = <<TEMPLATE
       },
       "mgmtSubnetName": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "management",
          "metadata": {
             "description": "The management interface will attach to this subnet"
          }
       },
       "mgmtSubnetIP": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "10.0.0.10",
          "metadata": {
             "description": "ASAv IP on the mgmt interface (example: 192.168.0.10)"
          }
       },
       "data1SubnetName": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "data-subnet1",
          "metadata": {
             "description": "The ASAv data1 interface will attach to this subnet"
          }
       },
       "data1SubnetIP": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "10.0.1.10",
          "metadata": {
             "description": "ASAv IP on the data1 interface (example: 192.168.1.10)"
          }
       },
       "data2SubnetName": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "data-subnet2",
          "metadata": {
             "description": "The ASAv data2 interface will attach to this subnet"
          }
       },
       "data2SubnetIP": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "10.0.2.10",
          "metadata": {
             "description": "ASAv IP on the data2 interface (example: 192.168.2.10)"
          }
       },
       "data3SubnetName": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "data-subnet3",
          "metadata": {
             "description": "The ASAv data3 interface will attach to this subnet"
          }
       },
       "data3SubnetIP": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "10.0.3.10",
          "metadata": {
             "description": "ASAv IP on the data3 interface (example: 192.168.3.10)"
          }
