@@ -164,7 +164,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                {
                   "name": "ipconfig1",
                   "properties": {
-                     "primary": true
+                     "primary": true,
                      "privateIPAllocationMethod": "Static",
                      "privateIPAddress": "[parameters('mgmtSubnetIP')]",
                      "subnet": {
@@ -172,7 +172,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                      }
                   }
                }
-            ],
+            ]
          }
       },
       {
@@ -185,7 +185,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                {
                   "name": "ipconfig1",
                   "properties": {
-                     "primary": false
+                     "primary": false,
                      "privateIPAllocationMethod": "Static",
                      "privateIPAddress": "[parameters('data1SubnetIP')]",
                      "subnet": {
@@ -193,7 +193,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                      }
                   }
                }
-            ],
+            ]
          }
       },
       {
@@ -206,7 +206,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                {
                   "name": "ipconfig1",
                   "properties": {
-                     "primary": false
+                     "primary": false,
                      "privateIPAllocationMethod": "Static",
                      "privateIPAddress": "[parameters('data2SubnetIP')]",
                      "subnet": {
@@ -214,7 +214,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                      }
                   }
                }
-            ],
+            ]
          }
       },
       {
@@ -227,7 +227,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                {
                   "name": "ipconfig1",
                   "properties": {
-                     "primary": false
+                     "primary": false,
                      "privateIPAllocationMethod": "Static",
                      "privateIPAddress": "[parameters('data3SubnetIP')]",
                      "subnet": {
@@ -235,7 +235,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                      }
                   }
                }
-            ],
+            ]
          }
       },
       {
