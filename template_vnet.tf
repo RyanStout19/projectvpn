@@ -135,3 +135,5 @@ template_content = <<TEMPLATE
     }
   ]
 }
+TEMPLATE
+}
