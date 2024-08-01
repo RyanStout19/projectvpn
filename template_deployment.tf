@@ -296,5 +296,6 @@ template_content = <<TEMPLATE
          "value": "[variables('NIC_ID_3')]"
       },
    }
+}
 TEMPLATE
 }
