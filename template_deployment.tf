@@ -25,7 +25,6 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
       },
       "adminPassword": {
          "type": "securestring",
-         "defaultValue": "",
          "metadata": {
             "description": "Password for the Virtual Machine. Passwords must be 12 to 72 chars and have at least 3 of the following: Lowercase, uppercase, numbers, special chars"
          }
