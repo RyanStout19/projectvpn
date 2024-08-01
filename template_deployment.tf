@@ -294,7 +294,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
        "data3NIC": {
           "type": "string",
           "value": "[variables('NIC_ID_3')]"
-       },
+       }
     }
  }
  TEMPLATE
