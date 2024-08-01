@@ -263,17 +263,29 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
             "networkProfile": {
                "networkInterfaces": [
                   {
-                     "id": "[variables('NIC_ID_0')]"
-                  },
-                  {
-                     "id": "[variables('NIC_ID_1')]"
-                  },
-                  {
-                     "id": "[variables('NIC_ID_2')]"
-                  },
-                  {
-                     "id": "[variables('NIC_ID_3')]"
-                  }
+                     "id": "[variables('NIC_ID_0')]",
+                     "properties": {
+                       "primary": true
+                     }
+                   },
+                   {
+                     "id": "[variables('NIC_ID_1')]",
+                     "properties": {
+                       "primary": false
+                     }
+                   },
+                   {
+                     "id": "[variables('NIC_ID_2')]",
+                     "properties": {
+                       "primary": false
+                     }
+                   },
+                   {
+                     "id": "[variables('NIC_ID_3')]",
+                     "properties": {
+                       "primary": false
+                     }
+                   }
                ]
             }
          },
