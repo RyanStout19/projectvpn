@@ -18,7 +18,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
       },
       "adminUsername": {
          "type": "string",
-         "defaultValue": "",
+         "defaultValue": "${var.admin_username}",
          "metadata": {
             "description": "Username for the Virtual Machine. admin, Administrator among other values are disallowed - see Azure docs"
          }
