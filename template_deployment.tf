@@ -243,6 +243,12 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
          "apiVersion": "2021-03-01",
          "name": "[parameters('vmName')]",
          "location": "[parameters('location')]",
+         "dependsOn": [
+            "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmName'), '-nic-0'))]",
+            "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmName'), '-nic-1'))]",
+            "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmName'), '-nic-2'))]",
+            "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmName'), '-nic-3'))]"
+         ],
          "properties": {
             "hardwareProfile": {
                "vmSize": "[parameters('vmSize')]"
