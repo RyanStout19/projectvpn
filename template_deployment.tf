@@ -39,13 +39,6 @@ template_content = <<TEMPLATE
               "description": "Specify the availability zone for deployment. Ensure that selected region supports availability zones and value provided is correct. Set to 0 if you do not want to use Availability Zones"
           }
       },
-      "vmStorageAccount": {
-         "type": "string",
-         "defaultValue": "${var.vm_storage_account}",
-         "metadata": {
-            "description": "A storage account name (boot diags require a storage account). Between 3 and 24 characters. Lowercase letters and numbers only"
-         }
-      },
       "virtualNetworkResourceGroup": {
          "type": "string",
          "defaultValue": "${var.virtual_network_resource_group}",
@@ -152,13 +145,6 @@ template_content = <<TEMPLATE
             "description": "Location (default: resource group location)"
          }
       },
-      "baseStorageURI": {
-         "type": "string",
-         "defaultValue": ".blob.core.windows.net",
-         "metadata": {
-            "description": "Base URI for all Azure Storage Accounts"
-         }
-      }
    },
    "variables": {
       "VNET_ID": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
@@ -166,7 +152,6 @@ template_content = <<TEMPLATE
       "NIC_ID_1": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmName'),'-nic-1'))]",
       "NIC_ID_2": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmName'),'-nic-2'))]",
       "NIC_ID_3": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmName'),'-nic-3'))]",
-      "STORAGE_URI": "[concat('https://',parameters('vmStorageAccount'),parameters('baseStorageURI'))]"
    },
    "resources": [
       {
@@ -287,12 +272,6 @@ template_content = <<TEMPLATE
                   }
                ]
             },
-            "diagnosticsProfile": {
-               "bootDiagnostics": {
-                  "enabled": "true",
-                  "storageUri": "[variables('STORAGE_URI')]"
-               }
-            }
          },
          "zones": [
             "[if(equals(parameters('availabilityZone'),0),json('null'),parameters('availabilityZone'))]"
@@ -316,10 +295,6 @@ template_content = <<TEMPLATE
          "type": "string",
          "value": "[variables('NIC_ID_3')]"
       },
-      "STORAGE_URI": {
-         "type": "string",
-         "value": "[variables('STORAGE_URI')]"
-      }
    }
 }
 TEMPLATE
