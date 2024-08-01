@@ -1,7 +1,9 @@
-resource "azurerm_resource_group_template_deployment" "projectvpn" {
+resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
   name                = "projectvpn-2"
   deployment_mode     = "Incremental"
   resource_group_name = azurerm_resource_group.projectvpn.name
+  depends_on = [azurerm_resource_group_template_deployment.projectvpn.name]
+  
 template_content = <<TEMPLATE
 {
    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
