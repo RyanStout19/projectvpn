@@ -303,7 +303,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
             }
          },
          "zones": [
-            "[if(equals(parameters('availabilityZone'), 0), json('null'), parameters('availabilityZone'))]"
+            "[if(equals(parameters('availabilityZone'), 0), json('null'), string(parameters('availabilityZone')))]"
          ],
          "copy": {
             "name": "vmCopy",
