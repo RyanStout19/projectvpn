@@ -276,25 +276,25 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
             "networkProfile": {
                "networkInterfaces": [
                   {
-                     "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0'))]"
+                     "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0'))]",
                      "properties": {
                         "primary": true
                      }
                   },
                   {
-                     "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-1'))]"
+                     "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-1'))]",
                      "properties": {
                         "primary": false
                      }
                   },
                   {
-                     "id": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/networkInterfaces/', parameters('vmNamePrefix'), copyIndex(), '-nic-2')]",
+                     "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-2'))]",
                      "properties": {
                         "primary": false
                      }
                   },
                   {
-                     "id": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/networkInterfaces/', parameters('vmNamePrefix'), copyIndex(), '-nic-3')]",
+                     "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-3'))]",
                      "properties": {
                         "primary": false
                      }
