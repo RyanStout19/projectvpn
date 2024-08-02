@@ -314,7 +314,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
    "outputs": {
       "vmNames": {
          "type": "array",
-         "value": "[array(range(0, parameters('mod_count')), concat(parameters('vmNamePrefix'), copyIndex()))]"
+         "value": "[array(range(0, parameters('mod_count')))]"
       }
    }
 }
