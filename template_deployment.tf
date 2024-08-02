@@ -127,6 +127,13 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
          "metadata": {
             "description": "Location (default: resource group location)"
          }
+      },
+      "instanceCount": {
+         "type": "int",
+         "defaultValue": 2,
+         "metadata": {
+            "description": "Number of VM instances in the scale set"
+         }
       }
    },
    "variables": {
