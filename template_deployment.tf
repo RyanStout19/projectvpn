@@ -232,6 +232,11 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
             "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmName'), '-nic-2'))]",
             "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmName'), '-nic-3'))]"
          ],
+         "plan": {
+            "name": "asav-azure-byol",
+            "publisher": "cisco",
+            "product": "cisco-asav"
+         },
          "properties": {
             "hardwareProfile": {
                "vmSize": "[parameters('vmSize')]"
