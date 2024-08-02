@@ -69,7 +69,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
       },
       "mgmtSubnetIPPrefix": {
          "type": "string",
-         "defaultValue": "${var.mgmt_subnet_ip_prefix}.",
+         "defaultValue": "${var.mgmt_subnet_ip_prefix}",
          "metadata": {
             "description": "Prefix for the ASAv IPs on the mgmt interface (example: 192.168.0.)"
          }
@@ -83,7 +83,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
       },
       "data1SubnetIPPrefix": {
          "type": "string",
-         "defaultValue": "${var.data1_subnet_ip_prefix}.",
+         "defaultValue": "${var.data1_subnet_ip_prefix}",
          "metadata": {
             "description": "Prefix for the ASAv IPs on the data1 interface (example: 192.168.1.)"
          }
@@ -97,7 +97,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
       },
       "data2SubnetIPPrefix": {
          "type": "string",
-         "defaultValue": "${var.data2_subnet_ip_prefix}.",
+         "defaultValue": "${var.data2_subnet_ip_prefix}",
          "metadata": {
             "description": "Prefix for the ASAv IPs on the data2 interface (example: 192.168.2.)"
          }
@@ -111,7 +111,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
       },
       "data3SubnetIPPrefix": {
          "type": "string",
-         "defaultValue": "${var.data3_subnet_ip_prefix}.",
+         "defaultValue": "${var.data3_subnet_ip_prefix}",
          "metadata": {
             "description": "Prefix for the ASAv IPs on the data3 interface (example: 192.168.3.)"
          }
