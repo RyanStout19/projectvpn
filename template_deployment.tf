@@ -18,7 +18,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
       },
       "mod_count": {
          "type": "int",
-         "defaultValue": 0,
+         "defaultValue": 1,
          "metadata": {
             "description": "Number of Virtual Machines to deploy."
          }
