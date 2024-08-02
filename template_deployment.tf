@@ -152,7 +152,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                   "properties": {
                      "primary": true,
                      "privateIPAllocationMethod": "Static",
-                     "privateIPAddress": "[concat('10.0.0.', add(copyIndex(), 10))]",
+                     "privateIPAddress": "[concat(parameters('mgmtSubnetIPPrefix'), add(copyIndex(), 10))]",
                      "subnet": {
                         "id": "[concat(variables('VNET_ID'),'/subnets/',parameters('mgmtSubnetName'))]"
                      }
@@ -177,7 +177,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                   "properties": {
                      "primary": false,
                      "privateIPAllocationMethod": "Static",
-                     "privateIPAddress": "[concat(parameters('data1SubnetIPPrefix'), copyIndex(), '.10')]",
+                     "privateIPAddress": "[concat(parameters('data1SubnetIPPrefix'), add(copyIndex(), 10))]",
                      "subnet": {
                         "id": "[concat(variables('VNET_ID'),'/subnets/',parameters('data1SubnetName'))]"
                      }
@@ -202,7 +202,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                   "properties": {
                      "primary": false,
                      "privateIPAllocationMethod": "Static",
-                     "privateIPAddress": "[concat(parameters('data2SubnetIPPrefix'), copyIndex(), '.10')]",
+                     "privateIPAddress": "[concat(parameters('data2SubnetIPPrefix'), add(copyIndex(), 10))]",
                      "subnet": {
                         "id": "[concat(variables('VNET_ID'),'/subnets/',parameters('data2SubnetName'))]"
                      }
@@ -227,7 +227,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                   "properties": {
                      "primary": false,
                      "privateIPAllocationMethod": "Static",
-                     "privateIPAddress": "[concat(parameters('data3SubnetIPPrefix'), copyIndex(), '.10')]",
+                     "privateIPAddress": "[concat(parameters('data3SubnetIPPrefix'), add(copyIndex(), 10))]",
                      "subnet": {
                         "id": "[concat(variables('VNET_ID'),'/subnets/',parameters('data3SubnetName'))]"
                      }
