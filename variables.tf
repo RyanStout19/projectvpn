@@ -91,6 +91,6 @@ variable "base_storage_uri" {
 
 variable "mod_count" {
   description = "Number of Virtual Machines to deploy."
-  type        = number
+  type        = integer
   default     = 2
 }
