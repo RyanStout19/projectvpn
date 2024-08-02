@@ -1,8 +1,8 @@
 locals {
   parameters = {
-    "vmNamePrefix" = {
-      value = var.vm_name
-    },
+ #   "vmNamePrefix" = {
+ #     value = var.vm_name
+ #   },
     "adminUsername" = {
       value = var.admin_username
     },
