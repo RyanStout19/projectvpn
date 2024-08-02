@@ -1,6 +1,6 @@
 locals {
   parameters = {
-    "vmName" = {
+    "vmNamePrefix" = {
       value = var.vm_name
     },
     "adminUsername" = {
@@ -24,26 +24,26 @@ locals {
     "mgmtSubnetName" = {
       value = var.mgmt_subnet_name
     },
-    "mgmtSubnetIP" = {
-      value = var.mgmt_subnet_ip
+    "mgmtSubnetIPPrefix" = {
+      value = var.mgmt_subnet_ip_prefix
     },
     "data1SubnetName" = {
       value = var.data1_subnet_name
     },
-    "data1SubnetIP" = {
-      value = var.data1_subnet_ip
+    "data1SubnetIPPrefix" = {
+      value = var.data1_subnet_ip_prefix
     },
     "data2SubnetName" = {
       value = var.data2_subnet_name
     },
-    "data2SubnetIP" = {
-      value = var.data2_subnet_ip
+    "data2SubnetIPPrefix" = {
+      value = var.data2_subnet_ip_prefix
     },
     "data3SubnetName" = {
       value = var.data3_subnet_name
     },
-    "data3SubnetIP" = {
-      value = var.data3_subnet_ip
+    "data3SubnetIPPrefix" = {
+      value = var.data3_subnet_ip_prefix
     },
     "vmSize" = {
       value = var.vm_size
