@@ -88,3 +88,9 @@ variable "base_storage_uri" {
   type    = string
   default = ".blob.core.windows.net"
 }
+
+variable "mod_count" {
+  description = "Number of Virtual Machines to deploy."
+  type        = number
+  default     = 2
+}
