@@ -39,7 +39,7 @@ variable "mgmt_subnet_name" {
   default = "management"
 }
 
-variable "mgmt_subnet_ip" {
+variable "mgmt_subnet_ip_prefix" {
   type    = string
   default = "10.0.0.10"
 }
@@ -49,7 +49,7 @@ variable "data1_subnet_name" {
   default = "data-subnet1"
 }
 
-variable "data1_subnet_ip" {
+variable "data1_subnet_ip_prefix" {
   type    = string
   default = "10.0.1.10"
 }
@@ -59,7 +59,7 @@ variable "data2_subnet_name" {
   default = "data-subnet2"
 }
 
-variable "data2_subnet_ip" {
+variable "data2_subnet_ip_prefix" {
   type    = string
   default = "10.0.2.10"
 }
@@ -69,7 +69,7 @@ variable "data3_subnet_name" {
   default = "data-subnet3"
 }
 
-variable "data3_subnet_ip" {
+variable "data3_subnet_ip_prefix" {
   type    = string
   default = "10.0.3.10"
 }
