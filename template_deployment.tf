@@ -113,26 +113,9 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
          "type": "string",
          "defaultValue": "Standard_D3_v2",
          "allowedValues": [
-            "Standard_D3",
-            "Standard_D4",
-            "Standard_D5",
-            "Standard_D3_v2",
-            "Standard_D4_v2",
-            "Standard_D5_v2",
-            "Standard_D8_v3",
-            "Standard_D16_v3",
-            "Standard_D8s_v3",
-            "Standard_D16s_v3",
-            "Standard_DS3",
-            "Standard_DS4",
-            "Standard_DS5",
-            "Standard_DS3_v2",
-            "Standard_DS4_v2",
-            "Standard_DS5_v2",
-            "Standard_DS8_v3",
-            "Standard_DS16_v3",
-            "Standard_DS8s_v3",
-            "Standard_DS16s_v3"
+            "Standard_B1s",
+            "Standard_B2s",
+            "Standard_D3_v2"
          ],
          "metadata": {
             "description": "Size of the virtual machine"
