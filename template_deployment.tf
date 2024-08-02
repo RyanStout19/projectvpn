@@ -152,7 +152,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
                   "properties": {
                      "primary": true,
                      "privateIPAllocationMethod": "Static",
-                     "privateIPAddress": "[concat(parameters('mgmtSubnetIPPrefix'), copyIndex(), '.10')]",
+                     "privateIPAddress": "[concat('10.0.0.', add(copyIndex(), 10))]",
                      "subnet": {
                         "id": "[concat(variables('VNET_ID'),'/subnets/',parameters('mgmtSubnetName'))]"
                      }
