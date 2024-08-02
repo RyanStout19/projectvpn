@@ -41,7 +41,7 @@ variable "mgmt_subnet_name" {
 
 variable "mgmt_subnet_ip_prefix" {
   type    = string
-  default = "10.0.0.10"
+  default = "10.0.0."
 }
 
 variable "data1_subnet_name" {
@@ -51,7 +51,7 @@ variable "data1_subnet_name" {
 
 variable "data1_subnet_ip_prefix" {
   type    = string
-  default = "10.0.1.10"
+  default = "10.0.1."
 }
 
 variable "data2_subnet_name" {
@@ -61,7 +61,7 @@ variable "data2_subnet_name" {
 
 variable "data2_subnet_ip_prefix" {
   type    = string
-  default = "10.0.2.10"
+  default = "10.0.2."
 }
 
 variable "data3_subnet_name" {
@@ -71,7 +71,7 @@ variable "data3_subnet_name" {
 
 variable "data3_subnet_ip_prefix" {
   type    = string
-  default = "10.0.3.10"
+  default = "10.0.3."
 }
 
 variable "vm_size" {
