@@ -145,6 +145,18 @@
       }
     },
     {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2021-02-01",
+      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Basic"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic"
+      }
+    },    
+    {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
       "copy": {
