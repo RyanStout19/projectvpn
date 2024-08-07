@@ -198,7 +198,7 @@
         "name": "nicLoop",
         "count": "[parameters('ASAvmCount')]"
       },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0')]",
+      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-1')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
@@ -229,7 +229,7 @@
         "name": "nicLoop",
         "count": "[parameters('ASAvmCount')]"
       },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0')]",
+      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-2')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
@@ -260,7 +260,7 @@
         "name": "nicLoop",
         "count": "[parameters('ASAvmCount')]"
       },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0')]",
+      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-3')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
