@@ -260,6 +260,11 @@
         "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-2'))]",
         "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-3'))]"
       ],
+      "plan": {
+        "name": "asav-azure-byol",
+        "publisher": "cisco",
+        "product": "cisco-asav"
+      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
