@@ -1,6 +1,6 @@
 resource "azurerm_resource_group_template_deployment" "projectvpn-asa" {
    name                = "projectvpn-2"
-   deployment_mode     = "Incremental"
+   deployment_mode     = "Complete"
    resource_group_name = azurerm_resource_group.projectvpn.name
    depends_on = [azurerm_resource_group_template_deployment.projectvpn]
    
