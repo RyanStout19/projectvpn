@@ -19,7 +19,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
   name                = "projectvpn-rg"
   resource_group_name = azurerm_resource_group.projectvpn_rg.name
   deployment_mode     = "Complete"
-  template_content = file("/home/azureuser/terraform/arm_template.json")
+  template_content = file("/home/azureuser/terraform/template_deployment.json")
   parameters_content = jsonencode({
     vmNamePrefix = {
       value = "asa-vm"
