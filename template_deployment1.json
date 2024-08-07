@@ -147,13 +147,48 @@
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2021-02-01",
-      "name": "[concat(parameters('vmNamePrefix'), '-publicIP')]",
+      "copy": {
+        "name": "publicIPLoop",
+        "count": "[parameters('ASAvmCount')]"
+      },
+      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP')]",
       "location": "[parameters('location')]",
       "sku": {
         "name": "Basic"
       },
       "properties": {
         "publicIPAllocationMethod": "Dynamic"
+      }
+    },       
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2021-02-01",
+      "copy": {
+        "name": "nicLoop",
+        "count": "[parameters('ASAvmCount')]"
+      },
+      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('SUBNET_MGMT_ID')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
+              }
+            }
+          }
+        ],
+        "primary": true
       }
     },    
     {
@@ -166,34 +201,8 @@
       "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
-      ],
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "subnet": {
-                "id": "[variables('SUBNET_MGMT_ID')]"
-              }
-            }
-          }
-        ],
-        "primary": true
-      }
-    },
-    {
-      "type": "Microsoft.Network/networkInterfaces",
-      "apiVersion": "2021-02-01",
-      "copy": {
-        "name": "nicLoop",
-        "count": "[parameters('ASAvmCount')]"
-      },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-1')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -203,13 +212,16 @@
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[variables('SUBNET_DATA1_ID')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
               }
             }
           }
         ],
         "primary": false
       }
-    },
+    },    
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
@@ -217,10 +229,11 @@
         "name": "nicLoop",
         "count": "[parameters('ASAvmCount')]"
       },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-2')]",
+      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -230,6 +243,9 @@
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[variables('SUBNET_DATA2_ID')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
               }
             }
           }
@@ -244,10 +260,11 @@
         "name": "nicLoop",
         "count": "[parameters('ASAvmCount')]"
       },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-3')]",
+      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -257,13 +274,16 @@
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[variables('SUBNET_DATA3_ID')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
               }
             }
           }
         ],
         "primary": false
       }
-    },
+    },  
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2021-03-01",
