@@ -159,7 +159,7 @@
       "properties": {
         "publicIPAllocationMethod": "Dynamic"
       }
-    },       
+    },
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
@@ -190,7 +190,7 @@
         ],
         "primary": true
       }
-    },    
+    },
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
@@ -221,7 +221,7 @@
         ],
         "primary": false
       }
-    },    
+    },
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
@@ -283,7 +283,7 @@
         ],
         "primary": false
       }
-    },  
+    },
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2021-03-01",
