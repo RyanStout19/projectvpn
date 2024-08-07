@@ -147,11 +147,7 @@
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2021-02-01",
-      "copy": {
-        "name": "publicIPLoop",
-        "count": "[parameters('ASAvmCount')]"
-      },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP')]",
+      "name": "[concat(parameters('vmNamePrefix'), '-publicIP')]",
       "location": "[parameters('location')]",
       "sku": {
         "name": "Basic"
@@ -163,15 +159,11 @@
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
-      "copy": {
-        "name": "nicLoop",
-        "count": "[parameters('ASAvmCount')]"
-      },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0')]",
+      "name": "[concat(parameters('vmNamePrefix'), '-nic-0')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), '-publicIP'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -183,7 +175,7 @@
                 "id": "[variables('SUBNET_MGMT_ID')]"
               },
               "publicIPAddress": {
-                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
+                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), '-publicIP'))]"
               }
             }
           }
@@ -194,15 +186,10 @@
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
-      "copy": {
-        "name": "nicLoop",
-        "count": "[parameters('ASAvmCount')]"
-      },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-1')]",
+      "name": "[concat(parameters('vmNamePrefix'), '-nic-1')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -212,28 +199,19 @@
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[variables('SUBNET_DATA1_ID')]"
-              },
-              "publicIPAddress": {
-                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
               }
             }
           }
-        ],
-        "primary": false
+        ]
       }
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
-      "copy": {
-        "name": "nicLoop",
-        "count": "[parameters('ASAvmCount')]"
-      },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-2')]",
+      "name": "[concat(parameters('vmNamePrefix'), '-nic-2')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -243,28 +221,19 @@
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[variables('SUBNET_DATA2_ID')]"
-              },
-              "publicIPAddress": {
-                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
               }
             }
           }
-        ],
-        "primary": false
+        ]
       }
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
-      "copy": {
-        "name": "nicLoop",
-        "count": "[parameters('ASAvmCount')]"
-      },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-nic-3')]",
+      "name": "[concat(parameters('vmNamePrefix'), '-nic-3')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -274,36 +243,23 @@
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[variables('SUBNET_DATA3_ID')]"
-              },
-              "publicIPAddress": {
-                "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/publicIPAddresses', concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP'))]"
               }
             }
           }
-        ],
-        "primary": false
+        ]
       }
     },
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2021-03-01",
-      "copy": {
-        "name": "vmLoop",
-        "count": "[parameters('ASAvmCount')]"
-      },
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex())]",
+      "name": "[concat(parameters('vmNamePrefix'), '0')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0'))]",
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-1'))]",
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-2'))]",
-        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-3'))]"
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-0'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-1'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-2'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-3'))]"
       ],
-      "plan": {
-        "name": "asav-azure-byol",
-        "publisher": "cisco",
-        "product": "cisco-asav"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
@@ -317,32 +273,32 @@
           }
         },
         "osProfile": {
-          "computerName": "[concat(parameters('vmNamePrefix'), copyIndex())]",
+          "computerName": "[concat(parameters('vmNamePrefix'), '0')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-0'))]",
+              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-0'))]",
               "properties": {
                 "primary": true
               }
             },
             {
-              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-1'))]",
+              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-1'))]",
               "properties": {
                 "primary": false
               }
             },
             {
-              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-2'))]",
+              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-2'))]",
               "properties": {
                 "primary": false
               }
             },
             {
-              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), copyIndex(), '-nic-3'))]",
+              "id": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-3'))]",
               "properties": {
                 "primary": false
               }
@@ -353,21 +309,14 @@
     }
   ],
   "outputs": {
-    "mgmtNICs": {
+    "nicIds": {
       "type": "array",
-      "value": "[range(0, parameters('ASAvmCount'))]"
-    },
-    "data1NICs": {
-      "type": "array",
-      "value": "[range(0, parameters('ASAvmCount'))]"
-    },
-    "data2NICs": {
-      "type": "array",
-      "value": "[range(0, parameters('ASAvmCount'))]"
-    },
-    "data3NICs": {
-      "type": "array",
-      "value": "[range(0, parameters('ASAvmCount'))]"
+      "value": [
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-0'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-1'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-2'))]",
+        "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/networkInterfaces', concat(parameters('vmNamePrefix'), '-nic-3'))]"
+      ]
     }
   }
 }
