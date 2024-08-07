@@ -147,7 +147,7 @@
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2021-02-01",
-      "name": "[concat(parameters('vmNamePrefix'), copyIndex(), '-publicIP')]",
+      "name": "[concat(parameters('vmNamePrefix'), '-publicIP')]",
       "location": "[parameters('location')]",
       "sku": {
         "name": "Basic"
