@@ -36,15 +36,6 @@ pipeline {
                 script {
                     sh 'echo "Applying Terraform plan"'
                     sh 'terraform apply -auto-approve tfplan'
-                    sh 'echo "Waiting for 30 seconds before refreshing state to capture Public IP..."'
-                    sh 'sleep 30'
-                    script {
-                        env.PUBLIC_IPS_JSON = sh(script: 'terraform output -json asa_vm_public_ips', returnStdout: true).trim()
-                        echo "Debug: JSON Output - ${env.PUBLIC_IPS_JSON}"
-                        def ips = readJSON(text: env.PUBLIC_IPS_JSON)
-                        env.PUBLIC_IPS = ips.join(",")
-                        echo "Debug: IPs - ${env.PUBLIC_IPS}"
-                    }
                 }
             }
         }
