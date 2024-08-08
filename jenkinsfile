@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         PATH = "${env.PATH}:/usr/local/bin"
-        // Define environment variables for Azure credentials
+        // define environment variables for Azure credentials
         TF_VAR_admin_password = credentials('admin_password')
         ARM_CLIENT_ID       = credentials('ARM_CLIENT_ID')
         ARM_CLIENT_SECRET   = credentials('ARM_CLIENT_SECRET')
