@@ -2,7 +2,11 @@ pipeline {
     agent any
     environment {
         PATH = "${env.PATH}:/usr/local/bin"
-        TF_VAR_admin_password = credentials('admin_password')
+        // Define environment variables for Azure credentials
+        TF_VAR_client_id       = credentials('ARM_CLIENT_ID')
+        TF_VAR_client_secret   = credentials('ARM_CLIENT_SECRET')
+        TF_VAR_tenant_id       = credentials('ARM_TENANT_ID')
+        TF_VAR_subscription_id = credentials('ARM_SUBSCRIPTION_ID')
     }
     stages {
         stage('Initialize') {
