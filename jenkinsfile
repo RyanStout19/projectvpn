@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        string(credentialsId: 'admin_password', variable: 'admin_password'),
+                        string(credentialsId: 'admin_password', variable: 'adminPassword'),
                         string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID'),
                         string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        string(credentialsId: 'admin_password', variable: 'admin_password'),
+                        string(credentialsId: 'admin_password', variable: 'adminPassword'),
                         string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID'),
                         string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        string(credentialsId: 'admin_password', variable: 'admin_password'),
+                        string(credentialsId: 'admin_password', variable: 'adminPassword'),
                         string(credentialsId: 'ARM_CLIENT_ID', variable: 'ARM_CLIENT_ID'),
                         string(credentialsId: 'ARM_TENANT_ID', variable: 'ARM_TENANT_ID'),
                         string(credentialsId: 'ARM_CLIENT_SECRET', variable: 'ARM_CLIENT_SECRET'),
