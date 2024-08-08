@@ -1,6 +1,7 @@
 variable "admin_username" {
   description = "Admin username for the VM"
   type        = string
+  default     = stoutmondo
 }
 variable "admin_password" {
   description = "Admin password for the VM"
@@ -9,7 +10,7 @@ variable "admin_password" {
 variable "ASAvm_count" {
   description = "Number of ASAvm instances to deploy"
   type        = number
-  default     = 0
+  default     = 1
 }
 resource "azurerm_resource_group" "projectvpn_rg" {
   name     = "projectvpn-2"
