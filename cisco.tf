@@ -1,7 +1,7 @@
 variable "admin_username" {
   description = "Admin username for the VM"
   type        = string
-  default     = stoutmondo
+  default     = "stoutmondo"
 }
 variable "admin_password" {
   description = "Admin password for the VM"
