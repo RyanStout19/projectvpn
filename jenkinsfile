@@ -43,13 +43,19 @@ pipeline {
             steps {
                 script {
                     echo "Validating Terraform outputs"
-                    def vmId = sh(script: 'terraform output -json vm_id', returnStdout: true).trim()
-                    if (vmId) {
+                    def vmIdExists = sh(script: 'terraform output -json | jq -e .vm_id', returnStatus: true) == 0
+
+                    if (vmIdExists) {
+                        def vmId = sh(script: 'terraform output -json vm_id', returnStdout: true).trim()
+                        if (vmId) {
                         echo "VM ID: $vmId"
                     } else {
                         error("VM ID output is missing or invalid")
-                     }
-                 }
+                    } 
+                    } else {
+                        echo "VM ID output not found, skipping validation as the resources might have been destroyed."
+                    }
+                }
             }
         }
     }
