@@ -10,7 +10,7 @@ variable "admin_password" {
 variable "ASAvm_count" {
   description = "Number of ASAvm instances to deploy"
   type        = number
-  default     = 0
+  default     = 1
 }
 resource "azurerm_resource_group" "projectvpn_rg" {
   name     = "projectvpn-2"
@@ -60,6 +60,9 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
     },
     ASAvmCount = {
       value = var.ASAvm_count
+    },
+    vmIds = {
+      value = azurerm_resource_group_template_deployment.outputs
     }
   })
   depends_on = [
