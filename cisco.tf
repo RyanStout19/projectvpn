@@ -61,11 +61,12 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
     ASAvmCount = {
       value = var.ASAvm_count
     },
-    vmIds = {
-      value = azurerm_resource_group_template_deployment.projectvpn.variables["vmIds"]
-    }
   })
   depends_on = [
     azurerm_resource_group.projectvpn_rg
   ]
+}
+
+output "vm_ids" {
+  value = azurerm_resource_group_template_deployment.projectvpn.outputs["vmIds"]
 }
