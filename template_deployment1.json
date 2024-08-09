@@ -336,6 +336,10 @@
     "data3NICs": {
       "type": "array",
       "value": "[range(0, parameters('ASAvmCount'))]"
+    },
+    "vmIds": { 
+      "type": "array",
+      "value": "[range(0, parameters('ASAvmCount'))]"
     }
   }
 }
