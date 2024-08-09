@@ -339,7 +339,12 @@
     },
     "vmIds": {
       "type": "array",
-      "value": "[array(parameters('ASAvmCount')).map(i => resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), i)))]"
+      "value": [
+          "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), copyIndex()))]",
+          "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), copyIndex(1)))]",
+          "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), copyIndex(2)))]",
+          "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), copyIndex(3)))]"
+      ]
     }
   }
 }
