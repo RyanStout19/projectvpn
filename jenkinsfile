@@ -51,7 +51,7 @@ pipeline {
                     """
 
                     // Retrieve resource group name from Terraform outputs
-                    def resourceGroupName = sh(script: 'terraform output -raw resource_group_name', returnStdout: true).trim()
+                    def resourceGroupName = "projectvpn-2"
                     
                     // List all resources in the resource group
                     echo "Listing all resources in resource group ${resourceGroupName}"
