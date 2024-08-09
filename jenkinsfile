@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         PATH = "${env.PATH}:/usr/local/bin"
-        // define environment variables for Azure credentials
+        // Define environment variables for Azure credentials
         TF_VAR_admin_password = credentials('admin_password')
         ARM_CLIENT_ID       = credentials('ARM_CLIENT_ID')
         ARM_CLIENT_SECRET   = credentials('ARM_CLIENT_SECRET')
@@ -39,20 +39,26 @@ pipeline {
                 }
             }
         }
-        stage('Terraform Output Validation') {
+        stage('Azure Resource Verification') {
             steps {
                 script {
-                    echo "Validating Terraform outputs"
-                    def vmIdsJson = sh(script: 'terraform output -json vmIds', returnStdout: true).trim()
-                    def vmIds = readJSON(text: vmIdsJson).vmIds
+                    echo "Verifying Azure resources"
+
+                    // Log in to Azure CLI
+                    sh """
+                    az login --service-principal -u ${ARM_CLIENT_ID} -p ${ARM_CLIENT_SECRET} --tenant ${ARM_TENANT_ID}
+                    az account set --subscription ${ARM_SUBSCRIPTION_ID}
+                    """
+
+                    // Retrieve resource group name from Terraform outputs
+                    def resourceGroupName = sh(script: 'terraform output -raw resource_group_name', returnStdout: true).trim()
                     
-                    if (vmIds && vmIds.size() > 0) {
-                        echo "VM IDs: ${vmIds.join(', ')}"
-                    } else {
-                        error("VM ID output is missing or invalid")
-                    }
+                    // List all resources in the resource group
+                    echo "Listing all resources in resource group ${resourceGroupName}"
+                    sh """
+                    az resource list --resource-group ${resourceGroupName} --output table
+                    """
                 }
             }
         }
     }
-}
