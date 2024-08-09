@@ -340,7 +340,7 @@
     },
     "vmIds": {
       "type": "array",
-      "value": "[range(0, parameters('ASAvmCount'))]"
+      "value": "[variables('vmIds')]"
     }
   }
 }
