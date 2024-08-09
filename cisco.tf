@@ -66,7 +66,3 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
     azurerm_resource_group.projectvpn_rg
   ]
 }
-
-output "vm_ids" {
-  value = azurerm_resource_group_template_deployment.projectvpn.outputs["vmIds"].value
-}

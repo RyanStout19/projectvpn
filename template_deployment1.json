@@ -105,7 +105,6 @@
     "SUBNET_DATA1_ID": "[concat(variables('VNET_ID'), '/subnets/', parameters('data1SubnetName'))]",
     "SUBNET_DATA2_ID": "[concat(variables('VNET_ID'), '/subnets/', parameters('data2SubnetName'))]",
     "SUBNET_DATA3_ID": "[concat(variables('VNET_ID'), '/subnets/', parameters('data3SubnetName'))]",
-    "vmIds": "[range(0, sub(parameters('ASAvmCount'), 1))]"
   },
   "resources": [
     {
@@ -337,10 +336,6 @@
     "data3NICs": {
       "type": "array",
       "value": "[range(0, parameters('ASAvmCount'))]"
-    },
-    "vmIds": {
-      "type": "array",
-      "value": "[variables('vmIds')]"
     }
   }
 }
