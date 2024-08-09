@@ -10,11 +10,6 @@ pipeline {
         ARM_SUBSCRIPTION_ID = credentials('ARM_SUBSCRIPTION_ID')
     }
     stages {
-        stage('Install jq') {
-            steps {
-                sh 'sudo apt-get update && sudo apt-get install -y jq'
-            }
-        }
         stage('Initialize') {
             steps {
                 script {
