@@ -45,7 +45,7 @@ pipeline {
                     echo "Validating Terraform outputs"
                     def vmIdsJson = sh(script: 'terraform output -json vmIds', returnStdout: true).trim()
                     def vmIds = readJSON(text: vmIdsJson).vmIds
-            
+                    
                     if (vmIds && vmIds.size() > 0) {
                         echo "VM IDs: ${vmIds.join(', ')}"
                     } else {

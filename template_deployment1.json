@@ -104,7 +104,8 @@
     "SUBNET_MGMT_ID": "[concat(variables('VNET_ID'), '/subnets/', parameters('mgmtSubnetName'))]",
     "SUBNET_DATA1_ID": "[concat(variables('VNET_ID'), '/subnets/', parameters('data1SubnetName'))]",
     "SUBNET_DATA2_ID": "[concat(variables('VNET_ID'), '/subnets/', parameters('data2SubnetName'))]",
-    "SUBNET_DATA3_ID": "[concat(variables('VNET_ID'), '/subnets/', parameters('data3SubnetName'))]"
+    "SUBNET_DATA3_ID": "[concat(variables('VNET_ID'), '/subnets/', parameters('data3SubnetName'))]",
+    "vmIds": "[range(0, sub(parameters('ASAvmCount'), 1))]"
   },
   "resources": [
     {
@@ -340,10 +341,7 @@
     "vmIds": {
       "type": "array",
       "value": [
-          "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), copyIndex()))]",
-          "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), copyIndex(1)))]",
-          "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), copyIndex(2)))]",
-          "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), copyIndex(3)))]"
+        "[array(variables('vmIds'))]"
       ]
     }
   }
