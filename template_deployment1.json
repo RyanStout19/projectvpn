@@ -337,9 +337,9 @@
       "type": "array",
       "value": "[range(0, parameters('ASAvmCount'))]"
     },
-    "vmIds": { 
+    "vmIds": {
       "type": "array",
-      "value": "[range(0, parameters('ASAvmCount'))]"
+      "value": "[range(0, parameters('ASAvmCount')).map(i => resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmNamePrefix'), i)))]"
     }
   }
 }
