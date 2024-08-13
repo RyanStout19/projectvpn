@@ -60,7 +60,7 @@ resource "azurerm_resource_group_template_deployment" "projectvpn" {
     },
     ASAvmCount = {
       value = var.ASAvm_count
-    },
+    }
   })
   depends_on = [
     azurerm_resource_group.projectvpn_rg
