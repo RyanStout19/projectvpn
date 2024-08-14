@@ -52,12 +52,20 @@ pipeline {
 
                     // Retrieve resource group name from Terraform outputs
                     def resourceGroupName = "projectvpn-2"
-                    
-                    // List all resources in the resource group
-                    echo "Listing all resources in resource group ${resourceGroupName}"
-                    sh """
-                    az resource list --resource-group ${resourceGroupName} --output table
-                    """
+
+                    // List all resources in the resource group and check the count
+                    def resourceCount = sh (
+                        script: """
+                        az resource list --resource-group ${resourceGroupName} --query "length([])" --output tsv
+                        """,
+                        returnStdout: true
+                    ).trim()
+
+                    if (resourceCount == "0") {
+                        error "No resources found in resource group ${resourceGroupName}."
+                    } else {
+                        echo "Found ${resourceCount} resources in resource group ${resourceGroupName}."
+                    }
                 }
             }
         }
