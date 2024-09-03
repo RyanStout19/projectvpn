@@ -10,7 +10,7 @@ variable "admin_password" {
 variable "ASAvm_count" {
   description = "Number of ASAvm instances to deploy"
   type        = number
-  default     = 1
+  default     = 2
 }
 resource "azurerm_resource_group" "projectvpn_rg" {
   name     = "projectvpn-2"
